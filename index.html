@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <title>My FCC Technical Documentation Page</title>
+</head>
+<body>
+    <div class="flex-container">
+        <nav id="navbar">
+            <header id="pydoc">Python Documentation</header>
+            <a class="nav-link" href="#Introduction">Introduction</a>
+            <a class="nav-link" href="#Python_as_a_Calculator">Python as a Calculator</a>
+            <a class="nav-link" href="#First_Steps_Toward_Programming">First Steps Toward Programming</a>
+            <a class="nav-link" href="#if_and_for_Statements"><code>if</code> and <code>for</code> Statements</a>
+            <a id="bottom-link" class="nav-link" href="#The_range()_Function">The <code>range()</code> Function</a>
+        </nav>
+
+        <div class="delimiter"><div class="square-div"></div></div>
+
+        <div class="scroll-container-parent">
+            <div class="scroll-container">
+                <main id="main-doc">
+
+                    <section id="Introduction" class="main-section">
+            <header class="sec-head">Introduction</header>
+            <p>In the following examples, input and output are distinguished by the presence or 
+                absence of prompts (>>> and …): to repeat the example, you must type everything 
+                after the prompt, when the prompt appears; lines that do not begin with a prompt 
+                are output from the interpreter. Note that a secondary prompt on a line by itself 
+                in an example means you must type a blank line; this is used to end a multi-line 
+                    command.</p>
+            <p>Many of the examples in this manual, even those entered at the interactive prompt, 
+                include comments. Comments in Python start with the hash character, #, and extend 
+                to the end of the physical line. A comment may appear at the start of a line or 
+                following whitespace or code, but not within a string literal. A hash character 
+                within a string literal is just a hash character. Since comments are to clarify 
+                code and are not interpreted by Python, they may be omitted when typing in 
+                    examples.</p>
+            <p>Some examples: </p>
+            <ul class="highlight">
+                <li><code class="comment"># this is the first comment</code></li>
+                <li><code>spam = 1 </code><code class="comment"># and this is the second comment</code></li>
+                <li><code class="comment"># and now a third</code></li>
+                <li><code>text = </code><code class="comment">"# This is not a comment because it's inside 
+                    quotes"</code></li>
+            </ul>
+                    </section>
+
+                    <section id="Python_as_a_Calculator" class="main-section">
+            <header class="sec-head">Python as a Calculator</header>
+            <p>Let’s try some simple Python commands. Start the interpreter and wait for the primary prompt, >>>. 
+                (It shouldn’t take long.)</p>
+            <h1>Numbers</h1>
+            <p>The interpreter acts as a simple calculator: you can type an expression at it and it will write the 
+                value. Expression syntax is straightforward: the operators <code>+</code>,<code> -</code>,
+                <code> *</code> and <code> /</code> work just like in most other languages 
+                (for example, Pascal or C); parentheses (<code>()</code>) can be used for grouping. For example:</p>
+            <ul class="highlight">
+                <li><code>>>> 2 + 2</code></li>
+                <li><code>4</code></li>
+                <li><code>>>> 50 - 5*6</code></li>
+                <li><code>20</code></li>
+                <li><code>>>> (50 - 5*6) / 4</code></li>
+                <li><code>5.0</code></li>
+                <li><code>>>> 8 / 5 </code><code class="comment"> # division always returns a floating point 
+                    number</code></li>
+                <li><code>1.6</code></li>
+            </ul>
+            <p>With Python, it is possible to use the <code>**</code> operator to calculate powers</p>
+            <ul class="highlight">
+                <li><code>>>> 5 ** 2 </code><code class="comment"> # 5 squared</code></li>
+                <li><code>25</code></li>
+                <li><code>>>> 2 ** 7 </code class="comment"> # 2 to the power of 7<code></code></li>
+                <li><code>128</code></li>
+            </ul>
+            <p>The equal sign <code>(=)</code> is used to assign a value to a variable. Afterwards, no result 
+                is displayed before the next interactive prompt:</p>
+            <ul class="highlight">
+                <li><code>>>> width = 20</code></li>
+                <li><code>>>> height = 5 * 9</code></li>
+                <li><code>>>> width * height</code></li>
+                <li><code>900</code></li>
+            </ul>
+            <p>If a variable is not “defined” (assigned a value), trying to use it will give you an error:</p>
+            <ul class="highlight">
+                <li><code>>>> n </code><code class="comment"> # try to access an undefined variable</code></li>
+                <li><code>Traceback (most recent call last):</code></li>
+                <li><code>File "<stdin>", line 1, in <module></code></li>
+                <li><code>NameError: name 'n' is not defined</code></li>
+            </ul>
+            <p>There is full support for floating point; operators with mixed type operands convert the 
+                integer operand to floating point:</p>
+            <ul class="highlight">
+                <li><code>>>> 4 * 3.75 - 1</code></li>
+                <li><code>14.0</code></li>
+            </ul>
+            <p>In interactive mode, the last printed expression is assigned to the variable <code>_</code>. 
+                This means that when you are using Python as a desk calculator, it is somewhat easier to 
+                continue calculations, for example:</p>
+            <ul class="highlight">
+                <li><code>>>> tax = 12.5 / 100</code></li>
+                <li><code>>>> price = 100.50</code></li>
+                <li><code>>>> price * tax</code></li>
+                <li><code>12.5625</code></li>
+                <li><code>>>> price + _</code></li>
+                <li><code>113.0625</code></li>
+                <li><code>>>> round(_, 2)</code></li>
+                <li><code>113.06</code></li>
+            </ul>
+            <p>This variable should be treated as read-only by the user. Don’t explicitly assign a value to it 
+                — you would create an independent local variable with the same name masking the built-in variable 
+                with its magic behavior.</p>
+            <p>In addition to <code>int</code> and <code>float</code>, Python supports other types of numbers, 
+                such as <code>Decimal</code> and <code>Fraction</code>. Python also has built-in support for 
+                <a href="">complex numbers</a><!--could link to python doc page-->, and uses the <code>j</code> 
+                or <code>J</code> suffix to indicate the imaginary part (e.g. <code>3+5j</code>).</p>
+            <h1>Strings</h1>
+            <p>Besides numbers, Python can also manipulate strings, which can be expressed in several ways. 
+                They can be enclosed in single quotes <code>('...')</code> or double quotes <code>("...")</code> with the same result 2. 
+                <code>\</code> can be used to escape quotes:</p>
+            <ul class="highlight">
+                <li><code>>>> 'spam eggs'</code><code class="comment"># single quotes</code></li>
+                <li><code>'spam eggs'</code></li>
+                <li><code>>>> 'doesn\'t'</code><code class="comment"># use \' to escape the single quote...</code></li>
+                <li><code>"doesn't"</code></li>
+                <li><code>>>> "doesn't"</code><code class="comment"># ...or use double quotes instead</code></li>
+                <li><code>"doesn't"</code></li>
+                <li><code>>>> '"Yes," they said.'</code></li>
+                <li><code>'"Yes," they said.'</code></li>
+                <li><code>>>> "\"Yes,\" they said."</code></li>
+                <li><code>"\"Yes,\" they said."</code></li>
+                <li><code>>>> '"Isn\'t," they said.'</code></li>
+                <li><code>'"Isn\'t," they said.'</code></li>
+            </ul>
+            <p>In the interactive interpreter, the output string is enclosed in quotes and special characters 
+                are escaped with backslashes. While this might sometimes look different from the input (the 
+                enclosing quotes could change), the two strings are equivalent. The string is enclosed in double 
+                quotes if the string contains a single quote and no double quotes, otherwise it is enclosed in single 
+                quotes. The <code>print()</code> function produces a more readable output, by omitting the enclosing 
+                quotes and by printing escaped and special characters:</p>
+            <ul class="highlight">
+                <li><code>>>> '"Isn\'t," they said.'</code></li>
+                <li><code>'"Isn\'t," they said.'</code></li>
+                <li><code>>>> print('"Isn\'t," they said.')</code></li>
+                <li><code>'"Isn\'t," they said.'</code></li>
+                <li><code>>>> s = 'First line.\nSecond line.'</code><code class="comment"># \n means newline</code></li>
+                <li><code>>>> s</code><code class="comment"># without print(), \n is included in the output</code></li>
+                <li><code>'First line.\nSecond line.'</code></li>
+                <li><code>>>> print(s)</code><code class="comment"># with print(), \n produces a new line</code></li>
+                <li><code>First line.</code></li>
+                <li><code>Second line.</code></li>
+            </ul>
+            <p>If you don’t want characters prefaced by <code>\</code> to be interpreted as special characters, you 
+                can use <em>raw strings</em> by adding an <code>r</code> before the first quote:</p>
+            <ul class="highlight">
+                <li><code>>>> print('C:\some\name')</code><code class="comment"># here \n means newline!</code></li>
+                <li><code>C:\some</code></li>
+                <li><code>ame</code></li>
+                <li><code>>>> print(r'C:\some\name')</code><code class="comment"># note the r before the quote</code></li>
+                <li><code>C:\some\name</code></li>
+            </ul>
+            <p>String literals can span multiple lines. One way is using triple-quotes: <code>"""..."""</code> or 
+                <code>'''...'''</code>. End of lines are automatically included in the string, but it’s possible to 
+                prevent this by adding a <code>\</code> at the end of the line. The following example:</p>
+            <ul class="highlight">
+                <li><code>print("""\</code></li>
+                <li><code>Usage: thingy [OPTIONS]</code></li>
+                <li><code>-h</code><code> Display this usage message</code></li>
+                <li><code>-H</code><code> Hostname to connect to</code></li>
+                <li><code>""")</code></li>
+            </ul>
+            <p>produces the following output (note that the initial newline is not included):</p>
+            <ul class="highlight">
+                <li><code>Usage: thingy [OPTIONS]</code></li>
+                <li><code>-h</code><code> Display this usage message</code></li>
+                <li><code>-H</code><code> Hostname to connect to</code></li>
+            </ul>
+            <p>Strings can be concatenated (glued together) with the <code>+</code> operator, and repeated with
+                <code>*</code>:</p>
+            <ul class="highlight">
+                <li><code>>>></code><code class=" comment"> # 3 times 'un', followed by 'ium'</code></li>
+                <li><code>>>> 3 * 'un' + 'ium'</code></li>
+                <li><code>unununium</code></li>
+            </ul>
+            <p>Two or more <em>string literals</em> (i.e. the ones enclosed between quotes) next to each other are 
+                automatically concatenated.</p>
+            <ul class="highlight">
+                <li><code>>>> 'Py' 'thon'</code></li>
+                <li><code>'Python'</code></li>
+            </ul>
+            <p>This feature is particularly useful when you want to break long strings:</p>
+            <ul class="highlight">
+                <li><code>>>> text = ('Put several strings within parentheses '</code></li>
+                <li><code>...</code><code> 'to have them joined together.')</code></li>
+                <li><code>>>> text</code></li>
+                <li><code>'Put several strings within parentheses to have them joined together.'</code></li>
+            </ul>
+            <p>This only works with two literals though, not with variables or expressions:</p>
+            <ul class="highlight">
+                <li><code>>>> prefix = 'Py'</code></li>
+                <li><code>>>> prefix 'thon'</code><code class="comment"># can't concatenate a variable and a string 
+                    literal</code></li>
+                <li><code> File "<stdin>", line 1</code></li>
+                <li><code> prefix 'thon'</code></li>
+                <li><code>^</code></li>
+                <li><code>SyntaxError</code><code>: invalid syntax</code></li>
+                <li><code>>>> ('un' * 3) 'ium'</code></li>
+                <li><code> File "<stdin>", line 1</code></li>
+                <li><code> ('un' * 3) 'ium'</code></li>
+                <li><code> ^</code></li>
+                <li><code>SyntaxError: invalid syntax</code></li>
+            </ul>
+            <p>If you want to concatenate variables or a variable and a literal, use <code>+</code>:</p>
+            <ul class="highlight">
+                <li><code>>>> prefix + 'thon'</code></li>
+                <li><code>'Python'</code></li>
+            </ul>
+            <p>Strings can be <em>indexed</em> (subscripted), with the first character having index 0. There is no 
+                separate character type; a character is simply a string of size one:</p>
+            <ul class="highlight">
+                <li><code>>>> word = 'Python'</code></li>
+                <li><code>>>> word[0]</code><code class="comment"> # character in position 0</code></li>
+                <li><code>'p'</code></li>
+                <li><code>>>> word[5]</code><code class="comment"> # character in position 0</code></li>
+                <li><code>'n'</code></li>
+            </ul>
+            <p>Indices may also be negative numbers, to start counting from the right:</p>
+            <ul class="highlight">
+                <li><code>>>> word[-1]</code><code class="comment"> # last character</code></li>
+                <li><code>'n'</code></li>
+                <li><code>>>> word[-2]</code><code class="comment"> # second-last character</code></li>
+                <li><code>'o'</code></li>
+                <li><code>>>> word[-6]</code></li>
+                <li><code>'p'</code></li>
+            </ul>
+            <p>Note that since -0 is the same as 0, negative indices start from -1.</p>
+            <p>In addition to indexing, <em>slicing</em> is also supported. While indexing is used to obtain 
+                individual characters, <em>slicing</em> allows you to obtain substring:</p>
+            <ul class="highlight">
+                <li><code>>>> word[0:2]</code><code class="comment"> # characters from position 0 (included) to 2 
+                    (excluded)</code></li>
+                <li><code>'Py'</code></li>
+                <li><code>>>> word[2:5]</code><code class="comment"> # characters from position 2 (included) to 5 
+                    (excluded)</code></li>
+                <li><code>tho''</code></li>
+            </ul>
+            <p>Note how the start is always included, and the end always excluded. This makes sure that 
+                <code>s[:i] + s[i:]</code> is always equal to <code>s</code>:</p>
+            <ul class="highlight">
+                <li><code>>>> word[:2] + word[2:]</code></li>
+                <li><code>'Python'</code></li>
+                <li><code>>>> word[:4] + word[4:]</code></li>
+                <li><code>'Python'</code></li>
+            </ul>
+            <p>Slice indices have useful defaults; an omitted first index defaults to zero, an omitted second index 
+                defaults to the size of the string being sliced.</p>
+            <ul class="highlight">
+                <li><code>>>> word[:2]</code><code class="comment"> # character from the beginning to position 2 
+                    (excluded)</code></li>
+                <li><code>'Py'</code></li>
+                <li><code>>>> word[4:]</code><code class="comment"># characters from position 4 (included) to the 
+                    end</code></li>
+                <li><code>'on'</code></li>
+                <li><code>>>> word[-2:]</code><code class="comment"># characters from the second-last (included) to the 
+                    end</code></li>
+                <li><code>'on'</code></li>
+            </ul>
+            <p>One way to remember how slices work is to think of the indices as pointing <em>between</em> characters, 
+                with the left edge of the first character numbered 0. Then the right edge of the last character of a 
+                string of <em>n</em> characters has index <em>n</em>, for example:</p>
+            <ul class="highlight">
+                <li><code>+---+---+---+---+---+---+</code></li>
+                <li><code>| P | y | t | h | o | n |</code></li>
+                <li><code>+---+---+---+---+---+---+</code></li>
+                <li><code>0   1   2   3   4   5   6</code></li>
+                <li><code>-6  -5  -4  -3  -2  -1</code></li>
+            </ul>
+            <p>The first row of numbers gives the position of the indices 0…6 in the string; the second row gives 
+                the corresponding negative indices. The slice from <em>i</em> to <em>j</em> consists of all characters 
+                between the edges labeled <em>i</em> and <em>j</em>, respectively.</p>
+            <p>For non-negative indices, the length of a slice is the difference of the indices, if both are within 
+                bounds. For example, the length of <code>word[1:3]</code> is 2.</p>
+            <p>Attempting to use an index that is too large will result in an error:</p>
+            <ul class="highlight">
+                <li><code>>>> word[42]</code><code class="comment"> # the word only has 6 characters</code></li>
+                <li><code>Traceback (most recent call last):</code></li>
+                <li><code> File "<stdin>", line 1, in <module></code></li>
+                <li><code>IndexError: string index out of range</code></li>
+            </ul>
+            <p>However, out of range slice indexes are handled gracefully when used for slicing:</p>
+            <ul class="highlight">
+                <li><code>>>> word[4:42]</code></li>
+                <li><code>'on'</code></li>
+                <li><code>>>> word[42:]</code></li>
+                <li><code>''</code></li>
+            </ul>
+            <p>Python strings cannot be changed — they are immutable. Therefore, assigning to an indexed position in 
+                the string results in an error:</p>
+            <ul class="highlight">
+                <li><code>>>> word[0] = 'J'</code></li>
+                <li><code>Traceback (most recent call last):</code></li>
+                <li><code> File "<stdin>", line 1, in <module></code></li>
+                <li><code>TypeError: 'str' object does not support item assignment</code></li>
+                <li><code>>>> word[2:] = 'py'</code></li>
+                <li><code>Traceback (most recent call last):</code></li>
+                <li><code> File "<stdin>", line 1, in <module></code></li>
+                <li><code>TypeError: 'str' object does not support item assignment</code></li>
+            </ul>
+            <p>If you need a different string, you should create a new one:</p>
+            <ul class="highlight">
+                <li><code>>>> 'J' + word[1:]</code></li>
+                <li><code>'Jython'</code></li>
+                <li><code>>>> word[:2] + 'py'</code></li>
+                <li><code>'Pypy'</code></li>
+            </ul>
+            <p>The built-in function <code>len()</code> returns the length of a string:</p>
+            <ul class="highlight">
+                <li><code>>>> s = 'supercalifragilisticexpialidocious'</code></li>
+                <li><code>>>> len(s)</code></li>
+                <li><code>34</code></li>
+            </ul>
+            <h1>Lists</h1>
+            <p>Python knows a number of <em>compound</em> data types, used to group together other values. The most 
+                versatile is the <em>list</em>, which can be written as a list of comma-separated values (items) 
+                between square brackets. Lists might contain items of different types, but usually the items all have 
+                the same type.</p>
+            <ul class="highlight">
+                <li><code>>>> squares = [1, 4, 9, 16, 25]</code></li>
+                <li><code>squares</code></li>
+                <li><code>[1, 4, 9, 16, 25]</code></li>
+            </ul>
+            <p>Like strings (and all other built-in sequence types), lists can be indexed and sliced:</p>
+            <ul class="highlight">
+                <li><code>>>> squares[0]</code><code class="comment"> # indexing returns the item</code></li>
+                <li><code>1</code></li>
+                <li><code>>>> squares[-1]</code></li>
+                <li><code>25</code></li>
+                <li><code>>>> squares[-3:]</code><code class="comment"> # slicing returns a new list</code></li>
+                <li><code>[9, 16, 25]</code></li>
+            </ul>
+            <p>All slice operations return a new list containing the requested elements. This means that the 
+                following slice returns a shallow copy of the list:</p>
+            <ul class="highlight">
+                <li><code>>>> squares[:]</code></li>
+                <li><code>[1, 4, 9, 16, 25]</code></li>
+            </ul>
+            <p>Lists also support operations like concatenation:</p>
+            <ul class="highlight">
+                <li><code>>>> squares + [36, 49, 64, 81, 100]</code></li>
+                <li><code>[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</code></li>
+            </ul>
+            <p>Unlike strings, which are immutable, lists are a mutable type, i.e. it is possible to change their 
+                content:</p>
+            <ul class="highlight">
+                <li><code>>>> cubes = [1, 8, 27, 65, 125]</code><code class="comment"> # something's wrong 
+                    here</code></li>
+                <li><code>>>> 4 ** 3</code><code class="comment"> # the cube of 4 is 64, not 65!</code></li>
+                <li><code>64</code></li>
+                <li><code>>>> cubes[3] = 64</code><code class="comment"> # replace the wrong value</code></li>
+                <li><code>>>> cubes</code></li>
+                <li><code>[1, 8, 27, 64, 125]</code></li>
+            </ul>
+            <p>You can also add new items at the end of the list, by using the <code>append()</code> <em>method</em> 
+                (we will see more about methods later):</p>
+            <ul class="highlight">
+                <li><code>>>> cubes.append(216)</code><code class="comment"> # add the cube of 6</code></li>
+                <li><code>>>> cubes.append(7 ** 3)</code><code class="comment"> # and the cube of 7</code></li>
+                <li><code>>>> cubes</code></li>
+                <li><code>[1, 8, 27, 64, 125, 216, 343]</code></li>
+            </ul>
+            <p>Assignment to slices is also possible, and this can even change the size of the list or clear it 
+                entirely:</p>
+                <ul class="highlight">
+                    <li><code>>>> letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']</code></li>
+                    <li><code>>>> letters</code></li>
+                    <li><code>['a', 'b', 'c', 'd', 'e', 'f', 'g']</code></li>
+                    <li><code>>>></code><code class="comment"> # replace some values</code></li>
+                    <li><code>>>> letters[2:5] = ['C', 'D', 'E']</code></li>
+                    <li><code>>>> letters</code></li>
+                    <li><code>['a', 'b', 'C', 'D', 'E', 'f', 'g']</code></li>
+                    <li><code>>>></code><code class="comment"> # now remove them</code></li>
+                    <li><code>>>> letters[2:5] = []</code></li>
+                    <li><code>>>> letters</code></li>
+                    <li><code>['a', 'b', 'f', 'g']</code></li>
+                    <li><code>>>></code><code class="comment"># clear the list by replacing all the elements with an 
+                        empty list</code></li>
+                    <li><code>>>> letters[:] = []</code></li>
+                    <li><code>>>> letters</code></li>
+                    <li><code>[]</code></li>
+                </ul>
+                <p>The built-in function <code>len()</code> also applies to lists:</p>
+                <ul class="highlight">
+                    <li><code>>>> letters = ['a', 'b', 'c', 'd']</code></li>
+                    <li><code>>>> len(letters)</code></li>
+                    <li><code>4</code></li>
+                </ul>
+                <p>It is possible to nest lists (create lists containing other lists), for example:</p>
+                <ul class="highlight">
+                    <li><code>>>> a = ['a', 'b', 'c']</code></li>
+                    <li><code>>>> n = [1, 2, 3]</code></li>
+                    <li><code>>>> x = [a, n]</code></li>
+                    <li><code>>>> x</code></li>
+                    <li><code>[['a', 'b', 'c'], [1, 2, 3]]</code></li>
+                    <li><code>>>> x[0]</code></li>
+                    <li><code>['a', 'b', 'c']</code></li>
+                    <li><code>>>> x[0][1]</code></li>
+                    <li><code>'b'</code></li>
+                </ul>
+               
+                    </section>
+
+                    <section id="First_Steps_Toward_Programming" class="main-section">
+            <header class="sec-head">First Steps Toward Programming</header>
+            <p>Of course, we can use Python for more complicated tasks than adding two and two together. 
+                For instance, we can write an initial sub-sequence of the Fibonacci series as follows:</p>
+            <ul class="highlight">
+                <li><code>>>></code><code class="comment"> # Fibonacci series:</code></li>
+                <li><code>... </code><code class="comment"> # the sum of two elements defines the next</code></li>
+                <li><code>... a, b = 0, 1</code></li>
+                <li><code>>>> while a < 10:</code></li>
+                <li><code>...     print(a)</code></li>
+                <li><code>...     a, b = b, a+b</code></li>
+                <li><code>...</code></li>
+                <li><code>0</code></li>
+                <li><code>1</code></li>
+                <li><code>1</code></li>
+                <li><code>2</code></li>
+                <li><code>3</code></li>
+                <li><code>5</code></li>
+                <li><code>8</code></li>
+            </ul>
+            <p>This example introduces several new features.</p>
+            <ul>
+                <li>The first line contains a <em>multiple</em> assignment: the variables <code>a</code> and 
+                    <code>b</code> simultaneously get the new values 0 and 1. On the last line this is used again, 
+                    demonstrating that the expressions on the right-hand side are all evaluated first before any of 
+                    the assignments take place. The right-hand side expressions are evaluated from the left to the 
+                    right.</li><br>
+                <li>The <code>while</code> loop executes as long as the condition (here: <code>a < 10</code>) remains 
+                    true. In Python, like in C, any non-zero integer value is true; zero is false. The condition may 
+                    also be a string or list value, in fact any sequence; anything with a non-zero length is true, 
+                    empty sequences are false. The test used in the example is a simple comparison. The standard 
+                    comparison operators are written the same as in C: <code><</code> (less than), <code>></code> 
+                    (greater than), <code>==</code> (equal to), <code><=</code> (less than or equal to), 
+                    <code>>=</code> (greater than or equal to) and <code>!=</code> (not equal to).</li><br>
+                <li>The <em>body</em> of the loop is <em>indented</em>: indentation is Python’s way of grouping 
+                    statements. At the interactive prompt, you have to type a tab or space(s) for each indented line. 
+                    In practice you will prepare more complicated input for Python with a text editor; all decent text 
+                    editors have an auto-indent facility. When a compound statement is entered interactively, it must 
+                    be followed by a blank line to indicate completion (since the parser cannot guess when you have 
+                    typed the last line). Note that each line within a basic block must be indented by the same 
+                    amount.</li><br>
+                <li>The <code>print()</code> function writes the value of the argument(s) it is given. It differs 
+                    from just writing the expression you want to write (as we did earlier in the calculator examples) 
+                    in the way it handles multiple arguments, floating point quantities, and strings. Strings are 
+                    printed without quotes, and a space is inserted between items, so you can format things nicely, 
+                    like this:</li><br>
+                    <ul class="highlight">
+                        <li><code>>>> i = 256*256</code></li>
+                        <li><code>>>> print('The value of i is', i)</code></li>
+                        <li><code>The value of i is 65536</code></li>
+                    </ul>
+                    <p>The keyword argument end can be used to avoid the newline after the output, or end the output 
+                        with a different string:</p>
+                    <ul class="highlight">
+                        <li><code>>>> a, b = 0, 1</code></li>
+                        <li><code>>>> while a < 1000:</code></li>
+                        <li><code>...     print(a, end=',')</code></li>
+                        <li><code>...     a, b = b, a+b</code></li>
+                        <li><code>...</code></li>
+                        <li><code>0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,</code></li>
+                    </ul>
+            </ul>
+                    </section>
+
+                    <section id="if_and_for_Statements" class="main-section">
+            <header class="sec-head"><code>if</code> and <code>for</code> Statements</header>
+            <h1><code>if</code> Statements</h1>
+            <p>Perhaps the most well-known statement type is the if statement. For example:</p>
+            <ul class="highlight">
+                <li><code>>>> x = int(input("Please enter an integer: "))</code></li>
+                <li><code>Please enter an integer: 42</code></li>
+                <li><code>>>> if x < 0:</code></li>
+                <li><code>...     x = 0</code></li>
+                <li><code>...     print('Negative changed to zero')</code></li>
+                <li><code>... elif x == 0:</code></li>
+                <li><code>...     print('Zero')</code></li>
+                <li><code>... elif x == 1:</code></li>
+                <li><code>...     print('Single')</code></li>
+                <li><code>... else:</code></li>
+                <li><code>...     print('More')</code></li>
+                <li><code>...</code></li>
+                <li><code>More</code></li>
+            </ul>
+            <p>There can be zero or more <code>elif</code> parts, and the <code>else</code> part is optional. The 
+                keyword <code>‘elif’</code> is short for <code>‘else if’</code>, and is useful to avoid excessive 
+                indentation. An <code>if … elif … elif …</code> sequence is a substitute for the <code>switch</code> 
+                or <code>case</code> statements found in other languages.</p>
+            <h1><code>for</code> Statements</h1>
+            <p>The <code>for</code> statement in Python differs a bit from what you may be used to in C or Pascal. 
+                Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving 
+                the user the ability to define both the iteration step and halting condition (as C), Python’s 
+                <code>for</code> statement iterates over the items of any sequence (a list or a string), in the 
+                order that they appear in the sequence. For example (no pun intended):</p>
+            <ul class="highlight">
+                <li><code>>>></code><code class="comment"> # Measure some strings:</code></li>
+                <li><code>... words = ['cat', 'window', 'defenestrate']</code></li>
+                <li><code>>>> for w in words:</code></li>
+                <li><code>...     print(w, len(w))</code></li>
+                <li><code>...</code></li>
+                <li><code>cat 3</code></li>
+                <li><code>window 6</code></li>
+                <li><code>defenestrate 12</code></li>
+            </ul>
+            <p>Code that modifies a collection while iterating over that same collection can be tricky to get right. 
+                Instead, it is usually more straight-forward to loop over a copy of the collection or to create a 
+                new collection:</p>
+            <ul class="highlight">
+                <li><code class="comment"># Strategy:  Iterate over a copy</code></li>
+                <li><code>for user, status in users.copy().items():</code></li>
+                <li><code>    if status == 'inactive':</code></li>
+                <li><code>        del users[user]</code></li>
+                <li><code> </code></li>
+                <li><code class="comment"># Strategy:  Create a new collection</code></li>
+                <li><code>active_users = {}</code></li>
+                <li><code>for user, status in users.items():</code></li>
+                <li><code>    if status == 'active':</code></li>
+                <li><code>        active_users[user] = status</code></li>
+            </ul>
+                    </section>
+
+                    <section id="The_range()_Function" class="main-section">
+            <header class="sec-head">The <code>range()</code> Function</header>
+            <p>If you do need to iterate over a sequence of numbers, the built-in function <code>range()</code> comes 
+                in handy. It generates arithmetic progressions:</p>
+            <ul class="highlight">
+                <li><code>>>> for i in range(5):</code></li>
+                <li><code>...     print(i)</code></li>
+                <li><code>...</code></li>
+                <li><code>0</code></li>
+                <li><code>1</code></li>
+                <li><code>2</code></li>
+                <li><code>3</code></li>
+                <li><code>4</code></li>
+            </ul>
+            <p>The given end point is never part of the generated sequence; <code>range(10)</code> generates 10 
+                values, the legal indices for items of a sequence of length 10. It is possible to let the range 
+                start at another number, or to specify a different increment (even negative; sometimes this is 
+                called the ‘step’):</p>
+            <ul class="highlight">
+                <li><code>>>> list(range(5, 10))</code></li>
+                <li><code>[5, 6, 7, 8, 9]</code></li>
+                <li><code></code></li>
+                <li><code>>>> list(range(0, 10, 3))</code></li>
+                <li><code>[0, 3, 6, 9]</code></li>
+                <li><code></code></li>
+                <li><code>>>> list(range(-10, -100, -30))</code></li>
+                <li><code>[-10, -40, -70]</code></li>
+            </ul>
+            <p>To iterate over the indices of a sequence, you can combine <code>range()</code> and 
+                <code>len()</code> as follows:</p>
+            <ul class="highlight">
+                <li><code>>>> a = ['Mary', 'had', 'a', 'little', 'lamb']</code></li>
+                <li><code>>>> for i in range(len(a)):</code></li>
+                <li><code>...     print(i, a[i])</code></li>
+                <li><code>...</code></li>
+                <li><code>0 Mary</code></li>
+                <li><code>1 had</code></li>
+                <li><code>2 a</code></li>
+                <li><code>3 little</code></li>
+                <li><code>4 lamb</code></li>
+            </ul>
+            <p>In most such cases, however, it is convenient to use the <code>enumerate()</code> function, see 
+                Looping Techniques.</p>
+            <p>A strange thing happens if you just print a range:</p>
+            <ul class="highlight">
+                <li><code>>>> range(10)</code></li>
+                <li><code>range (0, 10)</code></li>
+            </ul>
+            <p>In many ways the object returned by <code>range()</code> behaves as if it is a list, but in fact it 
+                isn’t. It is an object which returns the successive items of the desired sequence when you iterate 
+                over it, but it doesn’t really make the list, thus saving space.</p>
+            <p>We say such an object is iterable, that is, suitable as a target for functions and constructs that 
+                expect something from which they can obtain successive items until the supply is exhausted. We have 
+                seen that the <code>for</code> statement is such a construct, while an example of a function that 
+                takes an iterable is <code>sum()</code>:</p>
+            <ul class="highlight">
+                <li><code>>>> sum(range(4))</code><code class="comment">  # 0 + 1 + 2 + 3</code></li>
+                <li><code>6</code></li>
+            </ul>
+            <p>Later we will see more functions that return iterables and take iterables as arguments. In chapter 
+                Data Structures, we will discuss in more detail about <code>list()</code>.</p>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
